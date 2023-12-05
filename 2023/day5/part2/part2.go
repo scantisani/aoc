@@ -23,17 +23,33 @@ func LowestLocationNumber(lines []string) int {
 	seedRanges := parseSeedRanges(lines[0])
 	almanac := ParseAlmanac(lines[2:])
 
-	lowestLocation := LocationForSeed(seedRanges[0].start, almanac)
+	channel := make(chan int)
 	for _, seedRange := range seedRanges {
-		for seed := seedRange.start; seed <= seedRange.finish; seed++ {
-			location := LocationForSeed(seed, almanac)
-			if location < lowestLocation {
-				lowestLocation = location
-			}
+		go LowestLocationForRange(seedRange, almanac, channel)
+	}
+
+	lowestLocation := 9999999999
+	for range seedRanges {
+		location := <-channel
+		if location < lowestLocation {
+			lowestLocation = location
 		}
 	}
 
 	return lowestLocation
+}
+
+func LowestLocationForRange(seedRange SeedRange, almanac Almanac, channel chan int) {
+	lowestLocation := LocationForSeed(seedRange.start, almanac)
+
+	for seed := seedRange.start; seed <= seedRange.finish; seed++ {
+		location := LocationForSeed(seed, almanac)
+		if location < lowestLocation {
+			lowestLocation = location
+		}
+	}
+
+	channel <- lowestLocation
 }
 
 type SeedRange struct {
