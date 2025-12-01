@@ -41,10 +41,10 @@ var parseTests = []parseTest{
 			"London to Belfast = 518",
 			"Dublin to Belfast = 141",
 		}, Graph{
-		"London":  {"Belfast": 518, "Dublin": 464},
-		"Dublin":  {"Belfast": 141, "London": 464},
-		"Belfast": {"Dublin": 141, "London": 518},
-	},
+			"London":  {"Belfast": 518, "Dublin": 464},
+			"Dublin":  {"Belfast": 141, "London": 464},
+			"Belfast": {"Dublin": 141, "London": 518},
+		},
 	},
 	{
 		[]string{
@@ -55,11 +55,11 @@ var parseTests = []parseTest{
 			"Brussels to London = 263",
 			"Brussels to Belfast = 370",
 		}, Graph{
-		"Belfast":  {"Brussels": 370, "Dublin": 141, "London": 518},
-		"Brussels": {"Belfast": 370, "Dublin": 314, "London": 263},
-		"Dublin":   {"Belfast": 141, "Brussels": 314, "London": 464},
-		"London":   {"Belfast": 517, "Brussels": 263, "Dublin": 464},
-	},
+			"Belfast":  {"Brussels": 370, "Dublin": 141, "London": 518},
+			"Brussels": {"Belfast": 370, "Dublin": 314, "London": 263},
+			"Dublin":   {"Belfast": 141, "Brussels": 314, "London": 464},
+			"London":   {"Belfast": 517, "Brussels": 263, "Dublin": 464},
+		},
 	},
 }
 
